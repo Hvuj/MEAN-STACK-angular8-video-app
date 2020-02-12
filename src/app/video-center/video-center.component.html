@@ -1,0 +1,29 @@
+<div class="row mt-5">
+  <div class="col-sm-9">
+    <div *ngIf="!hiddenwVideo">
+      <form #form="ngForm" (ngSubmit)="onSubmitAddVideo(form.value)" class="jumbotron">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" required name="title" ngModel>
+        </div>
+        <div class="form-group">
+          <label>Url</label>
+          <input type="text" class="form-control" required name="url" ngModel>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" name="description" ngModel>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+    <app-video-detail (updateVideoEvent)="onUpdateVideoEvent($event)" (deleteVideoEvent)="onDeleteVideoEvent($event)"
+      *ngIf="selectedVideo && hiddenwVideo" [video]="selectedVideo">
+    </app-video-detail>
+  </div>
+  <div class="col-sm-3">
+    <button style="margin-bottom:2px;" type="button" (click)="newVideo()" class="btn btn-success">+ New
+      Video</button>
+    <app-video-list (SelectVideo)="onSelectVideo($event)" [videos]="videos"></app-video-list>
+  </div>
+</div>
